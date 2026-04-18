@@ -3,7 +3,7 @@ WISHLIST = [
     "Midna",
     "Zelda",
     "Akame",
-    "Sonie",
+    "Sonic",
     "Shadow",
 ]
 
