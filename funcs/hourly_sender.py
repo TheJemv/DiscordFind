@@ -14,8 +14,9 @@ async def hourly_sender(client):
     while True:
         channel = client.get_channel(TARGET_CHANNEL_ID)
         if channel:
-            await channel.send(MSG)
+            for _ in range(TIMES_PER_HOUR):
+                await channel.send(MSG)
+                await asyncio.sleep(1)
 
-        time = 3600 / TIMES_PER_HOUR
         await notify_wa()
-        await asyncio.sleep(time)
+        await asyncio.sleep(3600)
