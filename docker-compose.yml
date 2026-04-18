@@ -1,0 +1,7 @@
+services:
+  discord-app:
+    build: .
+    container_name: discord-app
+    env_file:
+      - .env
+    restart: unless-stopped
