@@ -11,13 +11,17 @@ import os
 from dotenv import load_dotenv
 import asyncio
 import discord
+
+from funcs.hourly_sender import hourly_sender
+from funcs.notify import notify_claim
+
 load_dotenv()
 
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as', self.user)
+        asyncio.create_task(hourly_sender(self))
 
-    # client.on("message")
     async def on_message(self, message):
         # don't respond to ourselves
         if message.author == self.user:
@@ -38,6 +42,7 @@ class MyClient(discord.Client):
             await message.components[0].children[0].click()
             await asyncio.sleep(0.1)
             await message.components[0].children[0].click()
-
+            await notify_claim(author_name)
+    
 client = MyClient()
 client.run(os.getenv("TOKEN"))
