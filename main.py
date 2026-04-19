@@ -34,15 +34,10 @@ class MyClient(discord.Client):
         author_name = (message.embeds[0].to_dict().get('author', {}).get('name') or "")
         if any(w.lower() in author_name.lower() for w in WISHLIST):
             await message.components[0].children[0].click()
-            await asyncio.sleep(0.1)
             await message.components[0].children[0].click()
-            await asyncio.sleep(0.1)
             await message.components[0].children[0].click()
-            await asyncio.sleep(0.1)
             await message.components[0].children[0].click()
-            await asyncio.sleep(0.1)
             await message.components[0].children[0].click()
-            await notify_claim(author_name)
     
 client = MyClient()
 client.run(os.getenv("TOKEN"))
