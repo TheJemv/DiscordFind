@@ -8,6 +8,7 @@ load_dotenv()
 TARGET_CHANNEL_ID = int(os.getenv("TARGET_CHANNEL_ID", "0"))
 ROLLS_PER_HOUR = 14
 MSG = "$wa"
+BET = "$p"
 
 async def hourly_sender(client):
     print("Hourly sender started")
@@ -20,3 +21,14 @@ async def hourly_sender(client):
 
         await notify_wa()
         await asyncio.sleep(3600)
+
+
+
+async def sender_every_2h(client):
+    print("Every 2h")
+    while True:
+        channel = client.get_channel(TARGET_CHANNEL_ID)
+        await channel.send(BET)
+        
+        await notify_wa()
+        await asyncio.sleep(7200)
