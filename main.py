@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 import asyncio
 import discord
 
-from funcs.hourly_sender import hourly_sender
+from funcs.hourly_sender import hourly_sender, sender_every_2h
 from funcs.notify import notify_claim
 
 load_dotenv()
@@ -21,6 +21,7 @@ class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as', self.user)
         asyncio.create_task(hourly_sender(self))
+        asyncio.create_task(sender_every_2h(self))
 
     async def on_message(self, message):
         # don't respond to ourselves
